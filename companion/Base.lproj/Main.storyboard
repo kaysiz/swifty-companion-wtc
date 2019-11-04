@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <userGuides>
-                            <userLayoutGuide location="16" affinity="minX"/>
+                            <userLayoutGuide location="1" affinity="minX"/>
                             <userLayoutGuide location="398" affinity="minX"/>
                         </userGuides>
                         <subviews>
@@ -78,12 +78,52 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="Txtusername" destination="dty-3Z-9oi" id="xRx-WG-u4a"/>
                         <outlet property="laError" destination="g9I-zj-yNc" id="3Ji-jh-sxI"/>
+                        <segue destination="aSr-jF-pCM" kind="show" identifier="userProfile" id="aVt-s6-val"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-66.666666666666671" y="114.50892857142857"/>
+            <point key="canvasLocation" x="-7" y="35"/>
+        </scene>
+        <!--User Profile View Controller-->
+        <scene sceneID="aXQ-Cd-kel">
+            <objects>
+                <viewController id="aSr-jF-pCM" customClass="UserProfileViewController" customModule="companion" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="teg-jS-hXa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="teh-P4-Gj5">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="jkjk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vK0-Fy-aDx">
+                                        <rect key="frame" x="108" y="742" width="158" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="teh-P4-Gj5" firstAttribute="top" secondItem="teg-jS-hXa" secondAttribute="top" id="MK2-8P-4Zd"/>
+                            <constraint firstItem="teh-P4-Gj5" firstAttribute="leading" secondItem="IXD-4l-oRp" secondAttribute="leading" id="bjr-Vd-c5c"/>
+                            <constraint firstItem="teh-P4-Gj5" firstAttribute="trailing" secondItem="IXD-4l-oRp" secondAttribute="trailing" id="iLE-jD-NAw"/>
+                            <constraint firstAttribute="bottom" secondItem="teh-P4-Gj5" secondAttribute="bottom" id="zJQ-L6-HKJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IXD-4l-oRp"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnUserName" destination="vK0-Fy-aDx" id="0ZZ-xD-k47"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cdb-sC-LSE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="805.60000000000002" y="34.729064039408868"/>
         </scene>
     </scenes>
     <resources>
