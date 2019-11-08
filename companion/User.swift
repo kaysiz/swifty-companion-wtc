@@ -8,17 +8,17 @@
 
 import Foundation
 
-struct User {
-    var id: String;
-    var displayname: String;
-    var correction_point: String;
-    var email: String;
+struct user {
+    static var id: String?;
+    static var displayname: String?;
+    static var correction_point: String?;
+    static var email: String?;
     //var first_name: String;
-    var image_url: String;
+    static var image_url: String?;
     //var last_name: String;
-    var phone: String;
-    var pool_year: String;
-    var wallet: String;
+    static var phone: String?;
+    static var pool_year: String?;
+    static var wallet: Int?;
     //var projects: String;
     //var skills: String;
 }

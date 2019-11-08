@@ -16,7 +16,8 @@ class UserProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        btnUserName.text = finalName
+        btnUserName.text = user.email
+        print(user.email as Any)
 
         // Do any additional setup after loading the view.
     }
