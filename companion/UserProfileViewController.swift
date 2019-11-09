@@ -43,13 +43,7 @@ class UserProfileViewController: UIViewController {
 
         return view
     }()
-    
-    lazy var detailsView: UIView = {
-        let details = UIView()
-        details.backgroundColor = .red
-        return details
-    }()
-    
+
     let profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -92,7 +86,6 @@ class UserProfileViewController: UIViewController {
     
     let tableView: UITableView = {
         let table = UITableView()
-        table.backgroundColor = .red
         return table
     }()
     
@@ -106,8 +99,8 @@ class UserProfileViewController: UIViewController {
         view.addSubview(containerView)
         containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 350)
         
-        view.addSubview(detailsView)
-        detailsView.anchor(top: containerView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 1150)
+        view.addSubview(tableView)
+        tableView.anchor(top: containerView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         
         if (user.image_url != nil) {
             Alamofire.request(user.image_url!).responseImage(completionHandler: { response in
@@ -119,7 +112,6 @@ class UserProfileViewController: UIViewController {
                         self.emailLabel.text = user.email
                         self.poolMonthLabel.text = user.pool_month?.capitalized
                         self.poolYearLabel.text = user.pool_year
-
                     }
                 }
             })
