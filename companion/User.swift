@@ -10,15 +10,14 @@ import Foundation
 
 struct user {
     static var id: String?;
-    static var displayname: String?;
+    static var login: String?;
     static var correction_point: String?;
     static var email: String?;
-    //var first_name: String;
     static var image_url: String?;
-    //var last_name: String;
-    static var phone: String?;
+    static var location: String?;
+    static var level: String?;
+    static var pool_month: String?;
     static var pool_year: String?;
-    static var wallet: Int?;
-    //var projects: String;
-    //var skills: String;
+    static var campus: String?;
+    static var displayName: String?;
 }
