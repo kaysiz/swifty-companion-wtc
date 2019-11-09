@@ -85,7 +85,6 @@ class ViewController: UIViewController {
         request.setValue(bearer, forHTTPHeaderField: "Authorization")
         Alamofire.request(request as URLRequestConvertible).validate(statusCode: 200..<500).responseJSON {
             response in
-            print(response.response?.statusCode as Any)
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
@@ -117,10 +116,10 @@ class ViewController: UIViewController {
                     if let displayName = json["displayname"].string {
                         user.displayName = displayName
                     }
-                    //                if let pool_month = json["pool_month"].string {
-                    //                    user.pool_month = pool_month
-                    //                    print(pool_month)
-                    //                }
+                    if let pool_month = json["pool_month"].string {
+                        user.pool_month = pool_month
+                        print(pool_month)
+                    }
                     //                user.correction_point = 0
                     //                if let correction_point = json["correction_point"].int {
                     //                    user.correction_point = correction_point
