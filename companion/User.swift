@@ -20,4 +20,6 @@ struct user {
     static var pool_year: String?;
     static var campus: String?;
     static var displayName: String?;
+    
+    static var skills: [(String, Float)] = [(String, Float)]()
 }

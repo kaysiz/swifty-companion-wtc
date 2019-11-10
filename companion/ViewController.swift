@@ -137,14 +137,14 @@ class ViewController: UIViewController {
                     //                    user.campus_city = campus_cite
                     //                    print(campus_cite)
                     //                }
-                    //                user.skills.removeAll()
-                    //                if let skills = json["cursus_users"][0]["skills"].array {
-                    //                    for i in skills {
-                    //                        if let level = i["level"].float {
-                    //                            user.skills.append((i["name"].string!, level))
-                    //                        }
-                    //                    }
-                    //                }
+                    user.skills.removeAll()
+                    if let skills = json["cursus_users"][0]["skills"].array {
+                        for i in skills {
+                            if let level = i["level"].float {
+                                user.skills.append((i["name"].string!, level))
+                            }
+                        }
+                    }
                     //                user.projects_users_sacces.removeAll()
                     //                user.projects_users_loading.removeAll()
                     //                user.projects_users_fail.removeAll()

@@ -9,10 +9,26 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import DDSpiderChart
 
 class UserProfileViewController: UIViewController {
     
     // MARK: - Properties
+    
+    lazy var scrollView: UIScrollView = {
+        let view = UIScrollView()
+        
+        view.addSubview(containerView)
+        containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 350)
+        
+        view.addSubview(skillsView)
+        skillsView.anchor(top: containerView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20)
+        skillsView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        view.addSubview(tableView)
+        tableView.anchor(top: skillsView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+        return view
+    }()
     
     lazy var containerView: UIView = {
         let view = UIView()
@@ -84,6 +100,11 @@ class UserProfileViewController: UIViewController {
         return label
     }()
     
+    let skillsView: DDSpiderChartView = {
+        let spiderChartView = DDSpiderChartView() // Replace with some frame or add constraints
+        return spiderChartView
+    }()
+    
     let tableView: UITableView = {
         let table = UITableView()
         return table
@@ -96,11 +117,8 @@ class UserProfileViewController: UIViewController {
         self.navigationItem.title = user.displayName
         view.backgroundColor = .white
         
-        view.addSubview(containerView)
-        containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 350)
-        
-        view.addSubview(tableView)
-        tableView.anchor(top: containerView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+        view.addSubview(scrollView)
+        scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor )
         
         if (user.image_url != nil) {
             Alamofire.request(user.image_url!).responseImage(completionHandler: { response in
@@ -112,6 +130,8 @@ class UserProfileViewController: UIViewController {
                         self.emailLabel.text = user.email
                         self.poolMonthLabel.text = user.pool_month?.capitalized
                         self.poolYearLabel.text = user.pool_year
+                        self.student_skils()
+                        print(user.skills)
                     }
                 }
             })
@@ -122,9 +142,38 @@ class UserProfileViewController: UIViewController {
                 self.emailLabel.text = user.email
                 self.poolMonthLabel.text = user.pool_month
                 self.poolYearLabel.text = user.pool_year
+                self.student_skils()
             }
         }
         // Do any additional setup after loading the view.
+    }
+    
+    func student_skils() {
+        
+        user.skills = user.skills.sorted(by: { $0 > $1 })
+        skillsView.color = .gray
+        var val : [Float] = []
+        var name : [String] = []
+        
+        for i in 0..<user.skills.count {
+            
+            name.append(user.skills[i].0)
+            val.append(user.skills[i].1 / 20.0)
+        }
+        skillsView.axes = name.map { attributedAxisLabel($0) }
+        skillsView.addDataSet(values:val, color: UIColor(red: 0.1, green: 0.7, blue: 0.6, alpha: 1.0))
+        skillsView.backgroundColor = .clear
+        skillsView.circleCount = 4
+        skillsView.circleGap = 30
+    }
+    
+    func attributedAxisLabel(_ label: String) -> NSAttributedString {
+        let style = NSMutableParagraphStyle()
+        style.alignment = NSTextAlignment.left
+        
+        let attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string: label, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "ArialMT", size: 8)!, NSAttributedString.Key.paragraphStyle: style]))
+        return attributedString
     }
 }
 
