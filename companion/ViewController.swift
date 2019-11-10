@@ -100,10 +100,8 @@ class ViewController: UIViewController {
                         user.image_url = image_url
                         print(image_url)
                     }
-                    user.location = ""
-                    if let location = json["location"].string {
-                        user.location = location
-                        print(location)
+                    if let level = json["cursus_users"][0]["level"].double {
+                        user.level = level
                     }
                     if let login = json["login"].string {
                         user.login = login
@@ -125,10 +123,7 @@ class ViewController: UIViewController {
                     //                    user.correction_point = correction_point
                     //                    print(correction_point)
                     //                }
-                    //                if let level = json["cursus_users"][0]["level"].double {
-                    //                    user.level = level
-                    //                    print(level)
-                    //                }
+                    //
                     //                if let campus_country = json["campus"][0]["country"].string {
                     //                    user.campus_country = campus_country
                     //                    print(campus_country)

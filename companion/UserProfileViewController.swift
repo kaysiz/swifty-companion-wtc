@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import Alamofire
 import AlamofireImage
 import DDSpiderChart
@@ -19,14 +20,14 @@ class UserProfileViewController: UIViewController {
         let view = UIScrollView()
         
         view.addSubview(containerView)
-        containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 350)
+        containerView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 400)
         
         view.addSubview(skillsView)
         skillsView.anchor(top: containerView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20)
         skillsView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
         view.addSubview(tableView)
-        tableView.anchor(top: skillsView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+        tableView.anchor(top: containerView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         return view
     }()
     
@@ -56,6 +57,11 @@ class UserProfileViewController: UIViewController {
         view.addSubview(emailLabel)
         emailLabel.anchor(top: loginLabel.bottomAnchor, paddingTop: 12)
         emailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        // level label
+        view.addSubview(levelLabel)
+        levelLabel.anchor(top: emailLabel.bottomAnchor, paddingTop: 12)
+        levelLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
         return view
     }()
@@ -66,6 +72,14 @@ class UserProfileViewController: UIViewController {
         iv.clipsToBounds = true
         iv.layer.cornerRadius = 150 / 2
         return iv
+    }()
+    
+    let levelLabel: UILabel = {
+        let lv = UILabel()
+        lv.textAlignment = .center
+        lv.font = UIFont.boldSystemFont(ofSize: 18)
+        lv.textColor = .white
+        return lv
     }()
     
     let loginLabel: UILabel = {
@@ -107,6 +121,7 @@ class UserProfileViewController: UIViewController {
     
     let tableView: UITableView = {
         let table = UITableView()
+        table.backgroundColor = .red
         return table
     }()
     
@@ -130,8 +145,14 @@ class UserProfileViewController: UIViewController {
                         self.emailLabel.text = user.email
                         self.poolMonthLabel.text = user.pool_month?.capitalized
                         self.poolYearLabel.text = user.pool_year
+                        
+                        var lev = user.level! - Double(Int(user.level!))
+                        lev = lev * 100
+                        lev = round(lev)
+                        let levell = Int(lev)
+                        self.levelLabel.text = "Level " + String(Int(user.level!)) + " - " + String(levell) + "%"
+                        
                         self.student_skils()
-                        print(user.skills)
                     }
                 }
             })
@@ -164,7 +185,7 @@ class UserProfileViewController: UIViewController {
         skillsView.addDataSet(values:val, color: UIColor(red: 0.1, green: 0.7, blue: 0.6, alpha: 1.0))
         skillsView.backgroundColor = .clear
         skillsView.circleCount = 4
-        skillsView.circleGap = 30
+        skillsView.circleGap = 20
     }
     
     func attributedAxisLabel(_ label: String) -> NSAttributedString {

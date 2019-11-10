@@ -15,7 +15,7 @@ struct user {
     static var email: String?;
     static var image_url: String?;
     static var location: String?;
-    static var level: String?;
+    static var level: Double?;
     static var pool_month: String?;
     static var pool_year: String?;
     static var campus: String?;
